@@ -35,15 +35,22 @@ export const resolvers = {
         clinicId,
         orderBy,
         orderDirection,
-      }: { clinicId: number; orderBy: string; orderDirection: "asc" | "desc" }
+        offset,
+        limit,
+      }: {
+        clinicId: number;
+        orderBy: string;
+        orderDirection: "asc" | "desc";
+        offset: number;
+        limit: number;
+      }
     ) => {
-      const filteredPatients = allPatients.filter(
-        (patient) => Number(patient.clinic_id) === Number(clinicId)
-      );
-      
-      return filteredPatients.sort((a, b) =>
-        comparePatients(a, b, orderBy, orderDirection)
-      );
+      const filteredPatients = allPatients
+        .filter((patient) => Number(patient.clinic_id) === Number(clinicId))
+        .sort((a, b) => comparePatients(a, b, orderBy, orderDirection));
+
+      // Apply pagination by slicing the array with the provided offset and limit.
+      return filteredPatients.slice(offset, offset + limit);
     },
   },
 };
