@@ -1,11 +1,12 @@
+import { comparePatients } from "../utils/comparePatients/comparePatients";
 import { readCSV } from "../utils/csvUtils";
 
-interface Clinic {
+export interface Clinic {
   id: number;
   name: string;
 }
 
-interface Patient {
+export interface Patient {
   id: number;
   clinic_id: number;
   first_name: string;
@@ -25,24 +26,6 @@ let allPatients: Patient[] = [];
   allPatients = [...patients1, ...patients2];
 })();
 
-const comparePatients = (
-  a: Patient,
-  b: Patient,
-  orderBy: string,
-  order: "asc" | "desc"
-) => {
-  const fieldA = a[orderBy as keyof Patient];
-  const fieldB = b[orderBy as keyof Patient];
-
-  if (fieldA < fieldB) {
-    return order === "asc" ? -1 : 1;
-  }
-  if (fieldA > fieldB) {
-    return order === "asc" ? 1 : -1;
-  }
-  return 0;
-};
-
 export const resolvers = {
   Query: {
     clinics: () => clinics,
@@ -51,14 +34,15 @@ export const resolvers = {
       {
         clinicId,
         orderBy,
-        order,
-      }: { clinicId: number; orderBy: string; order: "asc" | "desc" }
+        orderDirection,
+      }: { clinicId: number; orderBy: string; orderDirection: "asc" | "desc" }
     ) => {
       const filteredPatients = allPatients.filter(
         (patient) => Number(patient.clinic_id) === Number(clinicId)
       );
+      
       return filteredPatients.sort((a, b) =>
-        comparePatients(a, b, orderBy, order)
+        comparePatients(a, b, orderBy, orderDirection)
       );
     },
   },
