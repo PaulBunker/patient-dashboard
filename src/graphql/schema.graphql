@@ -1,0 +1,27 @@
+# Define the Clinic type
+type Clinic {
+  id: Int!
+  name: String!
+}
+
+# Define the Patient type
+type Patient {
+  id: Int!
+  clinic_id: Int!
+  first_name: String!
+  last_name: String!
+  date_of_birth: String!
+}
+
+# Define the queries
+type Query {
+  clinics: [Clinic!]!
+  patients(
+    clinicId: Int!
+    offset: Int
+    limit: Int
+    orderBy: String
+    orderDirection: String
+  ): [Patient!]!
+}
+
