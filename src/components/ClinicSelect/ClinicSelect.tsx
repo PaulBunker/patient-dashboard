@@ -16,7 +16,7 @@ const GET_CLINICS = gql`
   }
 `;
 
-const ClinicSelect: React.FC<ClinicSelectProps> = ({ setClinicId }) => {
+const ClinicSelect = ({ setClinicId }: ClinicSelectProps) => {
   const { loading, error, data } = useQuery(GET_CLINICS);
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
