@@ -69,3 +69,4 @@ To install and run the project in a development environment, follow these steps:
 - Not enough component tests but I'm out of time, I think you should have a flavour of my style though.
 - There's a couple of TODO's in the code for you to find.
 - The table sometimes flashes, I would possibly investigate leaving the data in the table and having a loading overlay to prevent the screen from jolting about. 
+- Pagination I started to think about this but ran out of time
