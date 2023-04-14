@@ -70,3 +70,6 @@ To install and run the project in a development environment, follow these steps:
 - There's a couple of TODO's in the code for you to find.
 - The table sometimes flashes, I would possibly investigate leaving the data in the table and having a loading overlay to prevent the screen from jolting about. 
 - Pagination I started to think about this but ran out of time
+- Deployment, I really wanted to look into getting this deployed with some sort of CI but I sunk way too much time fighting with tests unfortunately.
+
+#### Thanks for your consideration
