@@ -12,18 +12,13 @@
   margin-top: 1rem;
   background-color: #febea8;
 
-  thead {
-    background-color: #d99182;
-    color: #8664e3;
-    font-family: sans-serif;
-  }
-
   th,
   td {
     text-align: left;
     padding: 0.5rem;
     border: 1px solid #ddd;
-    color: #444444; /* Use a darker shade of grey for the text color */
+    border-color: #bbdacf;
+    color: #444444;
     font-family: sans-serif;
   }
 
