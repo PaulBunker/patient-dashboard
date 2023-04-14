@@ -65,4 +65,4 @@ To install and run the project in a development environment, follow these steps:
 ### Notes
 
 - The project requires at least Node.js version 18.16.0 to run. If you're using an older version of Node.js, the project and tests may not work as expected.
-- Given more time I would separate the back end and front end more but I still like monorepo style architecture
+- Given more time I would separate the back end and front end more but I still like monorepo style architecture. Simply moving things into folders started causing problems and I decided my time was better spent in the code.
