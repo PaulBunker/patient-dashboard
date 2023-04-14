@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import ClinicSelect from "./components/ClinicSelect";
-import PatientTable from "./components/PatientTable";
+import ClinicSelect from "./components/ClinicSelect/ClinicSelect";
+import PatientTable from "./components/PatientTable/PatientTable";
 import styles from "./App.module.css";
 
 function App() {
