@@ -7,7 +7,7 @@ interface PatientTableProps {
   clinicId: number | null;
 }
 
-const GET_PATIENTS = gql`
+export const GET_PATIENTS = gql`
   query GetPatients(
     $clinicId: Int!
     $orderBy: String!
@@ -62,6 +62,13 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
     refetch();
   };
 
+  const renderArrow = (field: string) => {
+    if (orderBy === field) {
+      return orderDirection === "asc" ? "▲" : "▼";
+    }
+    return "";
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.limitSelect}>
@@ -71,6 +78,10 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
           <option value="10">10</option>
           <option value="15">15</option>
           <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
         </select>
       </div>
       {loading ? (
@@ -85,25 +96,25 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
                 onClick={() => handleHeaderClick("id")}
                 className={orderBy === "id" ? styles.active : ""}
               >
-                ID
+                ID {renderArrow("id")}
               </th>
               <th
                 onClick={() => handleHeaderClick("first_name")}
                 className={orderBy === "first_name" ? styles.active : ""}
               >
-                First Name
+                First Name {renderArrow("first_name")}
               </th>
               <th
                 onClick={() => handleHeaderClick("last_name")}
                 className={orderBy === "last_name" ? styles.active : ""}
               >
-                Last Name
+                Last Name {renderArrow("last_name")}
               </th>
               <th
                 onClick={() => handleHeaderClick("date_of_birth")}
                 className={orderBy === "date_of_birth" ? styles.active : ""}
               >
-                Date of Birth
+                Date of Birth {renderArrow("date_of_birth")}
               </th>
             </tr>
           </thead>
@@ -114,7 +125,14 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
                   <td>{patient.id}</td>
                   <td>{patient.first_name}</td>
                   <td>{patient.last_name}</td>
-                  <td>{patient.date_of_birth}</td>
+                  <td>
+                    {/* TODO: Format date of birth based on browser locale */}
+                    {new Intl.DateTimeFormat("en-GB", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    }).format(patient.date_of_birth)}
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -122,7 +140,6 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
       )}
     </div>
   );
-
 };
 
 export default PatientTable;

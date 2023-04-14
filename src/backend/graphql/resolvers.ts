@@ -11,7 +11,7 @@ export interface Patient {
   clinic_id: number;
   first_name: string;
   last_name: string;
-  date_of_birth: string;
+  date_of_birth: Date;
 }
 
 let clinics: Clinic[] = [];

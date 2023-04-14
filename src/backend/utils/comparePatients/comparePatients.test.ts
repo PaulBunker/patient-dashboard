@@ -6,7 +6,7 @@ describe("comparePatients", () => {
     clinic_id: 2,
     first_name: "Alfred",
     last_name: "Allen",
-    date_of_birth: "1980-01-01",
+    date_of_birth: new Date("1980-01-01"),
   };
 
   const patientB = {
@@ -14,7 +14,7 @@ describe("comparePatients", () => {
     clinic_id: 1,
     first_name: "Zoe",
     last_name: "Zebra",
-    date_of_birth: "1990-01-01",
+    date_of_birth: new Date("1990-01-01"),
   };
 
   it("should return -1 if fieldA < fieldB and order is 'asc'", () => {
@@ -62,7 +62,7 @@ describe("comparePatients", () => {
     );
     expect(sortedPatients[0]).toBe(patientA);
   });
-  
+
   it("should sort patients in the correct date_of_birth order desc", () => {
     const patients = [patientB, patientA];
     const sortedPatients = patients.sort((a, b) =>

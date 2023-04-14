@@ -19,11 +19,16 @@ const readCSV = async (filename: string): Promise<any[]> => {
     parser.on("readable", function () {
       let record;
       while ((record = parser.read()) !== null) {
-        // Check for 'id' key and cast its value to a number
         // I would like to do this in a more generic way.
         // Perhaps the type from the schema somehow but I'm running way over time.
+
+        // Check for 'id' key and cast its value to a number
         if (record.hasOwnProperty("id")) {
           record.id = parseInt(record.id, 10);
+        }
+        // Check for 'date_of_birth' key and convert its value to a Date object
+        if (record.hasOwnProperty("date_of_birth")) {
+          record.date_of_birth = new Date(record.date_of_birth);
         }
         records.push(record);
       }
