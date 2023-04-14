@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client/core";
 import styles from "./PatientTable.module.scss";
@@ -31,13 +31,15 @@ const GET_PATIENTS = gql`
 `;
 
 const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+
   const { loading, error, data, refetch } = useQuery(GET_PATIENTS, {
     variables: {
       clinicId,
       orderBy: "date_of_birth",
       orderDirection: "asc",
       offset: 0,
-      limit: 10,
+      limit: itemsPerPage,
     },
     skip: !clinicId,
   });
@@ -46,10 +48,27 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
     if (clinicId !== null) {
       refetch();
     }
-  }, [clinicId, refetch]);
+  }, [clinicId, refetch, itemsPerPage]);
+
+  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setItemsPerPage(parseInt(event.target.value));
+  };
 
   return (
     <div className={styles.container}>
+      <div className={styles.controls}>
+        <label htmlFor="itemsPerPage">Items per page:</label>
+        <select
+          name="itemsPerPage"
+          id="itemsPerPage"
+          value={itemsPerPage}
+          onChange={handleItemsPerPageChange}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
