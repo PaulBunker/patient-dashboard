@@ -10,9 +10,9 @@ interface PatientTableProps {
 type ColumnOrdering = "id" | "first_name" | "last_name" | "date_of_birth";
 type SortDirection = "asc" | "desc";
 
-const DEFAULT_ORDER_BY = "id";
-const DEFAULT_ORDER_DIRECTION = "asc";
-const DEFAULT_LIMIT = 100;
+export const DEFAULT_ORDER_BY = "id";
+export const DEFAULT_ORDER_DIRECTION = "asc";
+export const DEFAULT_LIMIT = 100;
 
 export const GET_PATIENTS = gql`
   query GetPatients(
@@ -39,7 +39,9 @@ export const GET_PATIENTS = gql`
 
 const PatientTable = ({ clinicId }: PatientTableProps) => {
   const [orderBy, setOrderBy] = useState<ColumnOrdering>(DEFAULT_ORDER_BY);
-  const [orderDirection, setOrderDirection] = useState<SortDirection>(DEFAULT_ORDER_DIRECTION);
+  const [orderDirection, setOrderDirection] = useState<SortDirection>(
+    DEFAULT_ORDER_DIRECTION
+  );
   const [limit, setLimit] = useState(DEFAULT_LIMIT);
   const { loading, error, data, refetch } = useQuery(GET_PATIENTS, {
     variables: {
