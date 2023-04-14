@@ -32,11 +32,12 @@ const GET_PATIENTS = gql`
 
 const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [orderBy, setOrderBy] = useState("date_of_birth");
 
   const { loading, error, data, refetch } = useQuery(GET_PATIENTS, {
     variables: {
       clinicId,
-      orderBy: "date_of_birth",
+      orderBy,
       orderDirection: "asc",
       offset: 0,
       limit: itemsPerPage,
@@ -48,10 +49,16 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
     if (clinicId !== null) {
       refetch();
     }
-  }, [clinicId, refetch, itemsPerPage]);
+  }, [clinicId, refetch, itemsPerPage, orderBy]);
 
-  const handleItemsPerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleItemsPerPageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setItemsPerPage(parseInt(event.target.value));
+  };
+
+  const handleHeaderClick = (field: string) => {
+    setOrderBy(field);
   };
 
   return (
@@ -77,9 +84,13 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Date of Birth</th>
+              <th onClick={() => handleHeaderClick("first_name")}>
+                First Name
+              </th>
+              <th onClick={() => handleHeaderClick("last_name")}>Last Name</th>
+              <th onClick={() => handleHeaderClick("date_of_birth")}>
+                Date of Birth
+              </th>
             </tr>
           </thead>
           <tbody>
