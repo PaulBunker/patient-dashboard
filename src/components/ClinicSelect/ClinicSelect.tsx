@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client/core";
-import styles from "./ClinicSelect.module.css";
+import styles from "./ClinicSelect.module.scss";
 
 interface ClinicSelectProps {
   setClinicId: React.Dispatch<React.SetStateAction<number | null>>;

@@ -25,8 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start --config-overrides=config-overrides.js",
+    "build": "react-scripts build --config-overrides=config-overrides.js",
     "test": "react-scripts test --watchAll",
     "eject": "react-scripts eject",
     "server-start": "ts-node --project tsconfig.json src/backend/server.ts"
@@ -51,6 +51,8 @@
   },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0"
+    "@testing-library/user-event": "^13.5.0",
+    "@types/node-sass": "^4.11.3",
+    "node-sass": "^8.0.0"
   }
 }

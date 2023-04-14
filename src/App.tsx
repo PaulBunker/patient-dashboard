@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ClinicSelect from "./components/ClinicSelect/ClinicSelect";
 import PatientTable from "./components/PatientTable/PatientTable";
-import styles from "./App.module.css";
+import styles from "./App.module.scss";
 
 function App() {
   const [clinicId, setClinicId] = useState<number | null>(null);

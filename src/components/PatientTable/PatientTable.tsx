@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { gql } from "@apollo/client/core";
-import styles from "./PatientTable.module.css";
+import styles from "./PatientTable.module.scss";
 
 interface PatientTableProps {
   clinicId: number | null;

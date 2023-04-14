@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 1rem;
+  background-color: #febea8;
+
+  thead {
+    background-color: #d99182;
+    color: #8664e3;
+    font-family: sans-serif;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    color: #444444; /* Use a darker shade of grey for the text color */
+    font-family: sans-serif;
+  }
+
+  th {
+    font-weight: bold;
+  }
+
+  tr:nth-child(odd) {
+    background-color: #fec8b6;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fce5d5;
+  }
+
+  tr:hover {
+    background-color: #d99182;
+  }
+}
