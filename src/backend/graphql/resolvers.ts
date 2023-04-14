@@ -45,6 +45,7 @@ export const resolvers = {
         limit: number;
       }
     ) => {
+      console.log(orderDirection, orderBy)
       const filteredPatients = allPatients
         .filter((patient) => Number(patient.clinic_id) === Number(clinicId))
         .sort((a, b) => comparePatients(a, b, orderBy, orderDirection));
