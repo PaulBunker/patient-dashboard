@@ -7,6 +7,13 @@ interface PatientTableProps {
   clinicId: number | null;
 }
 
+type ColumnOrdering = "id" | "first_name" | "last_name" | "date_of_birth";
+type SortDirection = "asc" | "desc";
+
+const DEFAULT_ORDER_BY = "id";
+const DEFAULT_ORDER_DIRECTION = "asc";
+const DEFAULT_LIMIT = 100;
+
 export const GET_PATIENTS = gql`
   query GetPatients(
     $clinicId: Int!
@@ -30,10 +37,10 @@ export const GET_PATIENTS = gql`
   }
 `;
 
-const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
-  const [orderBy, setOrderBy] = useState("id");
-  const [orderDirection, setOrderDirection] = useState("asc");
-  const [limit, setLimit] = useState(10);
+const PatientTable = ({ clinicId }: PatientTableProps) => {
+  const [orderBy, setOrderBy] = useState<ColumnOrdering>(DEFAULT_ORDER_BY);
+  const [orderDirection, setOrderDirection] = useState<SortDirection>(DEFAULT_ORDER_DIRECTION);
+  const [limit, setLimit] = useState(DEFAULT_LIMIT);
   const { loading, error, data, refetch } = useQuery(GET_PATIENTS, {
     variables: {
       clinicId,
@@ -45,10 +52,8 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
     skip: !clinicId,
   });
 
-
-
-  const handleHeaderClick = (field: string) => {
-    if(orderBy === field) {
+  const handleHeaderClick = (field: ColumnOrdering) => {
+    if (orderBy === field) {
       setOrderDirection(orderDirection === "asc" ? "desc" : "asc");
     } else {
       setOrderBy(field);
@@ -60,11 +65,10 @@ const PatientTable: React.FC<PatientTableProps> = ({ clinicId }) => {
     if (clinicId !== null) {
       refetch();
     }
-  }, [clinicId, orderBy, orderDirection, refetch]);
+  }, [clinicId, orderBy, orderDirection, limit, refetch]);
 
   const handleLimitChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setLimit(parseInt(event.target.value));
-    refetch();
   };
 
   const renderArrow = (field: string) => {

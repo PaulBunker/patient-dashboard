@@ -66,3 +66,6 @@ To install and run the project in a development environment, follow these steps:
 
 - The project requires at least Node.js version 18.16.0 to run. If you're using an older version of Node.js, the project and tests may not work as expected.
 - Given more time I would separate the back end and front end more but I still like monorepo style architecture. Simply moving things into folders started causing problems and I decided my time was better spent in the code.
+- Not enough component tests but I'm out of time, I think you should have a flavour of my style though.
+- There's a couple of TODO's in the code for you to find.
+- The table sometimes flashes, I would possibly investigate leaving the data in the table and having a loading overlay to prevent the screen from jolting about. 
